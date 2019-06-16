@@ -1,0 +1,6 @@
+<div *ngIf="article">
+<div><h1>{{article.title}}</h1></div>
+<div>{{article.image}}</div>
+<div class="panel-body" [innerHTML]="article.content | safe: 'html'">
+</div>
+</div>

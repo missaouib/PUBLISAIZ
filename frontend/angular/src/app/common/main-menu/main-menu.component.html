@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{title}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="blog"> Blog <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="authors"> Authors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="market">Market</a>
+      </li>
+      <li *ngIf="admin" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/admin/controllers">Controllers</a>
+          <a class="dropdown-item" routerLink="/admin/roles">Roles</a>
+          <a class="dropdown-item" routerLink="/admin/permissions">Permissions</a>
+          <a class="dropdown-item" routerLink="/admin/users">Users</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/admin/message">Create Message</a>
+        </div>
+      </li>
+    </ul>
+    <ul *ngIf="logged" class="nav navbar-right in">
+      <li class="dropdown" data-toggle="tooltip" data-placement="right" title="{{logged.login}}">
+        <a data-toggle="dropdown" href="#">
+          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i> {{logged.login}}
+        </a>
+        <ul *ngIf="logged.login" class="dropdown-menu dropdown-user in">
+          <li><a routerLink="/cms/profile" class="text-left"><i class="fa fa-user fa-fw"></i> Profile</a>
+          </li>
+          <li><a routerLink="/cms/articles" class="text-left"><i class="fa fa-pencil-square fa-fw"></i> Write</a>
+          </li>
+          <li><a routerLink="/cms/sell" class="text-left"><i class="fa fa-gift fa-fw"></i> Sell</a>
+          </li>
+          <li><a routerLink="/cms/purchased" class="text-left"><i class="fa fa-money fa-fw"></i> Purchased</a>
+          </li>
+          <li><a routerLink="/cms/settings" class="text-left"><i class="fa fa-gear fa-fw"></i> Settings</a>
+          </li>
+          <li class="divider"></li>
+          <li><a class="text-left" routerLink="login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+          </li>
+        </ul>
+        <!-- /.dropdown-user -->
+      </li>
+    </ul>
+    <ul class="nav navbar-right">
+      <form class="form-inline">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-info" type="submit">Search</button>
+      </form>
+      <ul *ngIf="!logged" class="nav nav-item">
+        <button class="btn btn-info form-inline"><a class="text-left" routerLinkActive="active" 
+          routerLink="/login"><i class="fa fa-sign-out fa-fw"></i>
+            Login</a></button>
+      </ul>
+    </ul>
+  </div>

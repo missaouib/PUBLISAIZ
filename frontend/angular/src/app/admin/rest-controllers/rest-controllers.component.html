@@ -1,0 +1,53 @@
+<b> you are on page {{page+1}} </b>
+<a class="btn btn-xs btn-info" *ngIf="page>0" [routerLink]="['/admin/controllers']" [queryParams]="{ page: 0 }"> first </a>
+<a class="btn btn-xs btn-info" *ngIf="page>0" [routerLink]="['/admin/controllers']" [queryParams]="{ page: page-1 }"> page {{page}} </a>
+<a *ngIf="page+1 < last" class="btn btn-xs btn-info" [routerLink]="['/admin/controllers']" [queryParams]="{ page: page+1 }"> next </a>
+<a class="btn btn-xs btn-info" [routerLink]="['/admin/controllers']" [queryParams]="{ page: last-1 }"> last {{last}} </a>
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <tr *ngFor="let controller of controllers"
+      (keydown.enter)="confirmChanges(controller, addRole, deleteRole, addPermission, deletePermission)">
+      <td class="col">
+        <h3>{{controller.controller}}</h3>http method:<b>{{controller.httpMethod}}</b> // url:
+        <b>{{controller.method}}</b>
+      </td>
+      <td class="col">add&nbsp;role: <br>
+        <select class="form-control" #addRole>
+          <option></option>
+          <option *ngFor="let role of controller.addroles">{{role}}</option>
+        </select>
+      </td>
+      <td class="col">delete&nbsp;role: <br>
+        <select class="form-control" #deleteRole>
+          <option></option>
+          <option *ngFor="let role of controller.roles">{{role}}</option>
+        </select>
+      </td>
+      <td class="col">add&nbsp;permission: <br>
+        <select class="form-control" #addPermission>
+          <option></option>
+          <option *ngFor="let permissions of controller.addpermissions">{{permissions}}</option>
+        </select>
+      </td>
+      <td class="col">delete&nbsp;permission: <br>
+        <select class="form-control" #deletePermission>
+          <option></option>
+          <option *ngFor="let permissions of controller.permissions">{{permissions}}</option>
+        </select>
+      </td>
+      <td class="col">
+        <p *ngFor="let role of controller.roles">role: <b>{{role}}</b></p>
+      </td>
+      <td class="col">
+        <p *ngFor="let per of controller.permissions">permission: <b>{{per}}</b></p>
+      </td>
+      <td class="col">
+        active: <br> <b>{{controller.active}}</b>
+      </td>
+      <td class="col">
+        action: <br> <button class="btn btn-warning"
+          (click)="confirmChanges(controller, addRole, deleteRole, addPermission, deletePermission)">confirm</button>
+      </td>
+    </tr>
+  </table>
+</div>

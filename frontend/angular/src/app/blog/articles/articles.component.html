@@ -1,0 +1,36 @@
+<app-article></app-article>
+<div class="card card-body bg-light">
+<div class="row">
+    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+      <input class="form-control" [(ngModel)]="search.before" placeholder="published before" />
+    </div>
+    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+      <input class="form-control" [(ngModel)]="search.after" placeholder="published after" />
+    </div>
+    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+      <input class="form-control" [(ngModel)]="search.author" placeholder="published by" />
+    </div>
+    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+      <input class="form-control" [(ngModel)]="search.term" placeholder="search for content" />
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div *ngFor="let article of articles" class="col-4">
+    <a routerLink="blog/{{article.link}}">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <b>{{article.title}}</b>
+          <p>by {{article.author}} </p>
+        </div>
+        <img *ngIf="article.image" class="img img-responsive" src="{{environment.apiUrl+article.image}}" />
+        <div class="panel-body" [innerHTML]="article.content | stripTags | truncate: 40: '...': true">
+        </div>
+        <div class="panel-footer">
+          link: / blog / {{article.link}}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

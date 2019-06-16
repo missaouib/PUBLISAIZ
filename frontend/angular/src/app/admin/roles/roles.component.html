@@ -1,0 +1,39 @@
+
+CREATE NEW ROLE 
+<input (keydown)="onKeydown($event)" type="text" [(ngModel)]="newRole.name"> 
+<button class="btn btn-warning" (click)="createNewRole()">CREATE {{newRole.name}}</button>
+<hr>
+
+<div class="row" *ngFor="let role of roles">
+  <div class="col-12"><hr></div>
+  <div class="col"> name:
+    <br> <h3>{{role.name}}</h3> </div>
+  <div class="col"> created:
+    <br> {{role.created | date: 'medium' }} 
+    <br> by: {{role.createdBy}} <i *ngIf="!role.createdBy">SYSTEM</i>
+    <br> edited:
+    <br> {{role.edited | date: 'medium' }} 
+    <br> by: {{role.editedBy}} <i *ngIf="!role.createdBy">SYSTEM</i>
+  </div>
+  <div class="col">
+      <button class="btn btn-xs btn-warning" (click)="showControllers(role)">controllers [{{role.controllers.length}}]</button>
+      <div *ngIf="role.showControllers">
+        <div *ngFor="let controller of role.controllers">
+          <button class="btn btn-xs btn-danger" (click)="removeController(role, controller)">remove
+            {{controller.controller}}&nbsp;:&nbsp;{{controller.httpMethod}} </button>
+        </div>
+      </div>
+
+  </div>
+  <div class="col">
+      <button class="btn btn-xs btn-warning" (click)="showUsers(role)">users
+        [{{role.users.length}}]</button>
+      <div *ngIf="role.showUsers">
+        <div *ngFor="let user of role.users">
+          <button class="btn btn-xs btn-danger" (click)="removeUser(role, user)">remove {{user.login}}</button>
+        </div>
+      </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="row" *ngFor="let permission of permissions">
+  <div class="col-1">
+    {{permission.id}}
+  </div><div class="col-2">
+    created by: <br> {{permission.createdBy}}
+  </div><div class="col-2">
+    valid from: <br> {{permission.validFromDate | date: 'medium' }}
+  </div><div class="col-2">
+    valid to: <br> {{permission.validUpToDate | date: 'medium'}}
+  </div><div class="col-2">
+    permission for: <br> <b>{{permission.permissionFor}} </b>
+  </div><div class="col-2">
+    <div *ngFor="let controller of permission.controllers">
+      <div class="btn btn-xs btn-info">
+        {{controller.controller}} // {{controller.httpMethod}} // {{controller.method}}
+      </div>
+    </div>
+  </div><div class="col-1">
+    <button *ngIf="permission.active" class="btn btn-danger" (click)="switchActive(permission)">disable</button>
+    <button *ngIf="!permission.active"  class="btn btn-success" (click)="switchActive(permission)">enable</button>
+  </div>
+</div>

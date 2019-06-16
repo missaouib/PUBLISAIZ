@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col">
+    name
+    <input class="form-control" type="text" [(ngModel)]="user.name">
+    {{user.name}}
+  </div>
+  <div class="col">
+    surname
+    <input class="form-control" type="text" [(ngModel)]="user.surname">
+    {{user.surname}}
+  </div>
+  <div class="col">
+    password
+    <input [attr.disabled]="user.id" class="form-control" type="text" [(ngModel)]="user.password">
+    {{user.password}}
+  </div>
+  <div class="col">
+    login
+    <input class="form-control" type="text" [(ngModel)]="user.login">
+    {{user.login}}
+  </div>
+  <div class="col">
+    add role
+    <select class="form-control" #selectedRole>
+      <option></option>
+      <option *ngFor="let role of roles">
+        {{role.name}}
+      </option>
+    </select>
+  </div>
+  <div class="col">
+    action! <br>
+    <button class="form-control" class="btn btn-danger" (click)="create(user, selectedRole.value)">save</button>
+  </div>
+</div>
+<br>
+<div *ngFor="let e of error" class="alert alert-danger">{{e}}</div><br>
+<hr><br>

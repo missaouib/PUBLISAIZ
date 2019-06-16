@@ -1,0 +1,30 @@
+<app-article #articleComponent (event)="onEvent($event)" [article]="article"></app-article>
+
+<div class="row">
+    <div class="col-12">ARTICLES: {{articles.length}}</div>
+    <div class="col-6">
+        <div class="row">
+            <div *ngFor="let article of articles" class="col-4">
+                <a (click)="loadArticle(article.link)" routerLink="/cms/articles/{{article.link}}">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            {{article.title}}
+                        </div>
+                        <img class="img img-responsive" src="{{environment.apiUrl+article.image}}"/>
+                        <div class="panel-body" [innerHTML]="article.content | stripTags | truncate: 20: '...': true">
+
+                        </div>
+                        <div class="panel-footer">
+                            blog/{{article.link}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="col-12">
+            <app-files (setFeaturedEventEmitter)="updateArticle($event)" [images]="images"> </app-files>
+        </div>
+    </div>
+</div>

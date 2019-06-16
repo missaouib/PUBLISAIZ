@@ -1,0 +1,50 @@
+<app-user [user]="user" (event)="refresh()"></app-user>
+
+<div class="row" *ngFor="let user of users">
+  <div class="col-12">
+    <hr>
+  </div>
+  <div class="col-1">
+    {{user.id}}
+  </div>
+  <div class="col-2">
+    {{user.name}} {{user.surname}}
+    <br>
+    <b>{{user.login}}</b>
+  </div>
+  <div class="col-2">
+    created: <br>{{user.created | date: 'medium' }}
+  </div>
+  <div class="col-2">
+    last logged: <br> {{user.lastLogged | date: 'medium'}}
+  </div>
+  <div class="col-1">
+    <button class="btn btn-xs btn-warning" (click)="showPermissions(user)">permissions [{{user.permissions.length}}] </button>
+    <div *ngIf="user.showPermissions">
+      <div *ngFor="let permission of user.permissions">
+        <div *ngFor="let controller of permission.controllers">
+          <div class="btn btn-xs btn-info">
+            {{controller.controller}} // {{controller.httpMethod}} // {{controller.method}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-xs btn-warning" (click)="showRoles(user)">roles[{{user.roles.length}}]</button>
+    <div *ngIf="user.showRoles">
+      <div *ngFor="let controller of user.roles">
+        <div class="btn btn-xs btn-info">
+          {{controller}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1">
+    <button *ngIf="user.active" class="btn btn-danger" (click)="switchActive(user)">disable</button>
+    <button *ngIf="!user.active" class="btn btn-success" (click)="switchActive(user)">enable</button>
+  </div>
+  <div class="col-1">
+    <button (click)="selected(user)" class="btn btn-info">edit</button>
+  </div>
+</div>

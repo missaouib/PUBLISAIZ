@@ -1,0 +1,15 @@
+<a class="btn btn-danger" routerLink="/cms/articles">start new article</a>
+<hr>
+<div class="row">
+  <div class="col-1">
+    <label>title: </label>
+  </div>
+  <div class="col-10">
+    <input class="form-control" [(ngModel)]="article.title" />
+  </div>
+  <div class="col-1">
+    <button class="btn btn-success" (click)="edit()"> save </button>
+  </div>
+</div>
+<label>content: </label>
+<angular-editor [(ngModel)]="article.content" [config]="editorConfig"></angular-editor>

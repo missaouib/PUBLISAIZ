@@ -1,0 +1,9 @@
+<div class="row dark">
+  <div class="col-12">
+    IMAGES:
+  </div>
+  <div *ngFor="let source of images" class="col-4" style="padding-bottom: 0px; background-color: silver">
+    <div class="btn btn-info" (click)="setAsFeatured(source)">SET AS FEATURED</div><br>
+    <img src="{{envUrl + source.url}}" class="rounded float-left image-responsive" style="width: 180x; height: 105px" />
+  </div>
+</div>
