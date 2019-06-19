@@ -19,10 +19,7 @@ import publisaiz.datasources.database.entities.Article;
 import publisaiz.datasources.database.entities.User;
 import publisaiz.datasources.database.repository.ArticleRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,8 +29,6 @@ public class ArticleService {
     private static final Logger logger = LoggerFactory.getLogger(ArticleService.class);
     private ArticleRepository articleRepository;
     private Logged logged;
-    @PersistenceContext
-    EntityManager entityManager;
 
     public ArticleService(ArticleRepository articleRepository, Logged logged) {
         this.articleRepository = articleRepository;
@@ -84,9 +79,8 @@ public class ArticleService {
         return ResponseEntity.ok( ArticleDTO.convert(getArticlesByAuthor(logged.getUser(), pageable)));
     }
 
-    public ResponseEntity<List<ArticleDTO>> getByForm(ArticleFormDTO form, Pageable pageable) {
-        Iterable<Article> articles = articleRepository.findByForm(entityManager, form, pageable);
-        articles.forEach(article -> this.logger.info("found article [{}]", article));
+    public ResponseEntity<Page<ArticleDTO>> getByForm(ArticleFormDTO form, Pageable pageable) {
+        Page<Article> articles = articleRepository.findArticleByForm(form, pageable);
         return ResponseEntity.ok(ArticleDTO.convert(articles));
     }
 }

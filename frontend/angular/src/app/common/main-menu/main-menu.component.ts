@@ -13,7 +13,7 @@ export class MainMenuComponent implements OnInit {
   logged: any;
   admin = false;
 
-  constructor(private logger: NGXLogger ,private router: Router, private appService: AppService) { }
+  constructor(private logger: NGXLogger , private router: Router, private appService: AppService) { }
 
   ngOnInit() {
     this.logged = this.appService.getSessionLogged();

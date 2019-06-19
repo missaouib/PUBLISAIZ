@@ -14,7 +14,6 @@ import java.util.Set;
 public class SendingMailExecutor {
 
     private SystemMailer systemMailer;
-    private boolean isDebug;
     private JavaMailSender javaMailSender;
 
     public SendingMailExecutor(SystemMailer systemMailer, JavaMailSender javaMailSender) {
@@ -54,15 +53,6 @@ public class SendingMailExecutor {
             });
         }, "sending email from " + systemMailer.getFrom() + " to " + toUser.getLogin());
         sendingMail.start();
-    }
-
-    private String isDebug() {
-        return Boolean.valueOf(isDebug).toString();
-    }
-
-    public SendingMailExecutor setDebug(boolean debug) {
-        isDebug = debug;
-        return this;
     }
 
     public SystemMailer getSystemMailer() {

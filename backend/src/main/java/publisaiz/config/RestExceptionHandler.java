@@ -34,9 +34,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
                                                                    WebRequest request) {
-        String error = ex.getName() + " should be of type " + ex.getRequiredType().getName();
-        logger.error("{}", ex);
-        return new ResponseEntity<>(ex, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        String error = ex.getName() + " should be of type of " + ex.getRequiredType().getName();
+        logger.error("[{}] : [{}]", error, ex);
+        return new ResponseEntity<>(error, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({Throwable.class})

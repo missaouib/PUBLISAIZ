@@ -1,21 +1,27 @@
 <app-article></app-article>
+
 <div class="card card-body bg-light">
-<div class="row">
-    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
-      <input class="form-control" [(ngModel)]="search.before" placeholder="published before" />
+  <div class="row">
+    <div class="col-3">
+      <input #after (input)="filter($event)" class="form-control" bsDatepicker [bsConfig]="config"
+        [(ngModel)]="search.after" placeholder="published after" />
     </div>
-    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
-      <input class="form-control" [(ngModel)]="search.after" placeholder="published after" />
+    <div class="col-3">
+      <input #before (input)="filter($event)" class="form-control" bsDatepicker [bsConfig]="config"
+        [(ngModel)]="search.before" placeholder="published before" />
     </div>
-    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+    <div class="col-3" (input)="filter($event)">
       <input class="form-control" [(ngModel)]="search.author" placeholder="published by" />
     </div>
-    <div class="col-3" (keydown.enter)="filter($event)" (focusout)="filter($event)">
+    <div class="col-3" (input)="filter($event)">
       <input class="form-control" [(ngModel)]="search.term" placeholder="search for content" />
     </div>
   </div>
 </div>
 <hr>
+<pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="totalElements" [(ngModel)]="page"
+  (pageChanged)="filter($event)">
+</pagination>
 <div class="row">
   <div *ngFor="let article of articles" class="col-4">
     <a routerLink="blog/{{article.link}}">
@@ -34,3 +40,6 @@
     </a>
   </div>
 </div>
+<pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="totalElements" [(ngModel)]="page"
+  (pageChanged)="filter($event)">
+</pagination>

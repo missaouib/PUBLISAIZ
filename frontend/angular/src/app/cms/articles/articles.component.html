@@ -1,8 +1,13 @@
-<app-article #articleComponent (event)="onEvent($event)" [article]="article"></app-article>
+<app-article #articleComponent (event)="refreshAll()" [article]="article"></app-article>
 
 <div class="row">
-    <div class="col-12">ARTICLES: {{articles.length}}</div>
     <div class="col-6">
+        <div class="col-12">
+            <h2>ARTICLES</h2>
+        </div>
+        <pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="articlesTotalItems" [(ngModel)]="articlesPage"
+            (pageChanged)="refreshArticles($event)">
+        </pagination>
         <div class="row">
             <div *ngFor="let article of articles" class="col-4">
                 <a (click)="loadArticle(article.link)" routerLink="/cms/articles/{{article.link}}">
@@ -23,6 +28,12 @@
         </div>
     </div>
     <div class="col-6">
+        <div class="col-12">
+            <h2>IMAGES</h2>
+        </div>
+        <pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="imagesTotalItems" [(ngModel)]="imagesPage"
+            (pageChanged)="getImages($event)">
+        </pagination>
         <div class="col-12">
             <app-files (setFeaturedEventEmitter)="updateArticle($event)" [images]="images"> </app-files>
         </div>

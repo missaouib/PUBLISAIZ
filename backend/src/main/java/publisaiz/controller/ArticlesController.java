@@ -12,8 +12,6 @@ import publisaiz.controller.api.ArticleFormDTO;
 import publisaiz.controller.api.dto.ArticleDTO;
 import publisaiz.services.ArticleService;
 
-import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
@@ -32,7 +30,7 @@ public class ArticlesController {
     }
 
     @GetMapping("all")
-    public ResponseEntity<?> getAll(@PageableDefault(sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<?> getAll(@PageableDefault(sort = "created", direction = Sort.Direction.DESC, page = 0, size = 9) Pageable pageable) {
         logger.debug("pageable: [{}]", pageable);
         ResponseEntity<?> articles = articleService.getArticles(pageable);
         logger.debug("articles: [{}]", articles);
@@ -40,7 +38,7 @@ public class ArticlesController {
     }
 
     @GetMapping("my")
-    public ResponseEntity<?> getAllmy(@SortDefault(sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<?> getAllmy(@SortDefault(sort = "created", direction = Sort.Direction.DESC) @PageableDefault (page = 0, size = 9) Pageable pageable) {
         logger.debug("getAllmy: [{}]", pageable);
         return articleService.getMyArticles(pageable);
     }
@@ -52,14 +50,15 @@ public class ArticlesController {
         logger.debug("response", responseWithArticle);
         return responseWithArticle;
     }
+    
     @PostMapping
     public ResponseEntity<?> editArticle(@RequestBody ArticleDTO entity) {
         logger.debug("editArticle: [{}]", entity);
         return articleService.editArticle(entity);
     }
 
-    @GetMapping("form")
-    public ResponseEntity<List<ArticleDTO>> getByForm(ArticleFormDTO articleFormDTO, Pageable pageable){
+    @PostMapping("form")
+    public ResponseEntity<?> getByForm(@RequestBody ArticleFormDTO articleFormDTO, @PageableDefault(size = 9) Pageable pageable){
         logger.info("articleFormDTO: [{}]", articleFormDTO);
         return articleService.getByForm(articleFormDTO, pageable);
     }

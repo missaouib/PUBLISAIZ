@@ -53,17 +53,19 @@ public class PermissionService {
         return userRepository.getByLogin(permissionFor);
     }
 
-    public ResponseEntity findAll(Pageable pageable) {
+    public ResponseEntity<?> findAll(Pageable pageable) {
         Page<Permission> all = permissionRepository.findAll(pageable);
         if (all != null)
             return ResponseEntity.ok(PermissionDTO.convert(all));
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity save(PermissionDTO permissionDTO) {
-        PermissionDTO re = new PermissionDTO(permissionDTO.toEntity(this));
-        if (re != null)
+    public ResponseEntity<?> save(PermissionDTO permissionDTO) {
+        Permission permission = permissionDTO.toEntity(this);
+        if (permission != null) {
+            PermissionDTO re = new PermissionDTO(permission);
             return ResponseEntity.ok(re);
+        }
         return ResponseEntity.badRequest().build();
     }
 }

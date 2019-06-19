@@ -1,7 +1,5 @@
 package publisaiz.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,7 @@ import java.util.Optional;
 @Component
 public class Logged implements AuditorAware<String> {
 
-    private final static Logger logger = LoggerFactory.getLogger(Logged.class);
+    //private final static Logger logger = LoggerFactory.getLogger(Logged.class);
     private final UserRepository userRepository;
 
     public Logged(UserRepository userRepository) {

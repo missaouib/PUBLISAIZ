@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InterceptorModule } from './interceptor.module';
-import { NGXLogger, NgxLoggerLevel, LoggerModule } from 'ngx-logger';
+import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
 
 const routes: Routes = [
   { path: '', loadChildren: './blog/blog.module#BlogModule' },

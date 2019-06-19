@@ -14,11 +14,9 @@ import javax.transaction.Transactional;
 public class DocumentService {
 
     private final DocumentRepository documentRepository;
-    private final EntityManagerFactory entityManagerFactory;
 
-    public DocumentService(DocumentRepository documentRepository, EntityManagerFactory entityManagerFactory) {
+    public DocumentService(DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
-        this.entityManagerFactory = entityManagerFactory;
     }
 
     public void save(Document document) {

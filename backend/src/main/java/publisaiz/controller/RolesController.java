@@ -9,15 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import publisaiz.controller.api.dto.RoleDTO;
 import publisaiz.services.RoleService;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
-
 @RestController
 @RequestMapping("api/roles")
 @CrossOrigin(origins = {"http://localhost:4200", "http://publisaiz"}, maxAge=3600,
-        allowCredentials = "true", methods = {
-        POST, GET, PATCH, PUT, DELETE, OPTIONS
-})
+        allowCredentials = "true" )
 public class RolesController {
 
     private final static Logger logger = LoggerFactory.getLogger(RoleService.class);
@@ -31,10 +26,7 @@ public class RolesController {
     public Page<RoleDTO> getAll(Pageable pageable) {
         return roleService.findAll(pageable);
     }
-    @CrossOrigin(
-            origins = {"http://localhost:4200", "http://publisaiz"},
-            maxAge=3600,
-            allowCredentials = "true")
+
     @PostMapping
     public RoleDTO save(@RequestBody RoleDTO role) {
         return roleService.save(role);

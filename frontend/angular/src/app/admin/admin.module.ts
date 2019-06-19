@@ -8,6 +8,7 @@ import { MessageComponent } from './message/message.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { RolesComponent } from './roles/roles.component';
 import { FormsModule } from '@angular/forms';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const routes = [
   { path: 'users', component: UsersComponent },
@@ -28,6 +29,7 @@ const routes = [
                   PermissionsComponent,
                   RolesComponent],
   imports: [
+    PaginationModule.forRoot(),
     FormsModule,
     CommonModule,
     RouterModule.forChild(routes)

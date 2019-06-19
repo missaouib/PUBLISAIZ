@@ -1,8 +1,8 @@
-<b> you are on page {{page+1}} </b>
-<a class="btn btn-xs btn-info" *ngIf="page>0" [routerLink]="['/admin/controllers']" [queryParams]="{ page: 0 }"> first </a>
-<a class="btn btn-xs btn-info" *ngIf="page>0" [routerLink]="['/admin/controllers']" [queryParams]="{ page: page-1 }"> page {{page}} </a>
-<a *ngIf="page+1 < last" class="btn btn-xs btn-info" [routerLink]="['/admin/controllers']" [queryParams]="{ page: page+1 }"> next </a>
-<a class="btn btn-xs btn-info" [routerLink]="['/admin/controllers']" [queryParams]="{ page: last-1 }"> last {{last}} </a>
+<!-- TODO: set pagination configurable - now totalElements *2 because we have 5 elements on page instead of default 10 -->
+<pagination [boundaryLinks]="true" [itemsPerPage]="5" [totalItems]="totalElements" [(ngModel)]="page"
+  (pageChanged)="refreshControllers($event)">
+</pagination>
+
 <div class="table-responsive">
   <table class="table table-hover table-striped">
     <tr *ngFor="let controller of controllers"

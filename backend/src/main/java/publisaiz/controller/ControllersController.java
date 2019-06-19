@@ -10,15 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import publisaiz.controller.api.dto.ControllerDTO;
 import publisaiz.services.ControllerService;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
-
 @RestController
 @RequestMapping("api/controllers")
 @CrossOrigin(origins = {"http://localhost:4200", "http://publisaiz"}, maxAge=3600,
-        allowCredentials = "true", methods = {
-        POST, GET, PATCH, PUT, DELETE, OPTIONS
-})
+        allowCredentials = "true" )
 public class ControllersController {
 
     private final ControllerService controllerService;
@@ -36,12 +31,9 @@ public class ControllersController {
         logger.info("get, [{}]", pageable);
         return controllerService.findAll(pageable);
     }
-    @CrossOrigin(
-            origins = {"http://localhost:4200", "http://publisaiz"},
-            maxAge=3600,
-            allowCredentials = "true")
+    
     @PostMapping
-    public ResponseEntity edit(@RequestBody ControllerDTO dto) {
+    public ResponseEntity<?> edit(@RequestBody ControllerDTO dto) {
         logger.info("post, [{}]", dto);
         return controllerService.save(dto);
     }

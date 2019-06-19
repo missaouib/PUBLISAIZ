@@ -20,8 +20,7 @@ export class ArticlesService {
     }
 
     getArticlesWithFilter(page: number, search: any) {
-        search.page = page;
         this.logger.debug('ArticlesService#getArticlesWithFilter: ', search);
-        return this.httpclient.get<any>( environment.apiUrl + 'articles/form', { params: search } );
+        return this.httpclient.post<any>(environment.apiUrl + 'articles/form?page=' + page, search );
     }
 }

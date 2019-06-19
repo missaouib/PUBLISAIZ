@@ -18,7 +18,7 @@ public class Tag {
 
     @Id()
     @NaturalId
-    private final String value;
+    private String value;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Article> articles = new HashSet<>();
@@ -27,6 +27,8 @@ public class Tag {
         value = t;
     }
 
+    public Tag() {
+    }
 
     public Set<Article> getArticles() {
         return this.articles;
@@ -55,6 +57,5 @@ public class Tag {
     public int hashCode() {
         return Objects.hash(value);
     }
-
 
 }

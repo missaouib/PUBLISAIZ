@@ -3,6 +3,7 @@ package publisaiz.controller.api.dto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.lang.NonNull;
 import publisaiz.datasources.database.entities.Controller;
 import publisaiz.datasources.database.entities.Role;
@@ -62,11 +63,8 @@ public class ControllerDTO {
         logger.debug(toString());
     }
 
-    public static List<ControllerDTO> convert(Page<Controller> controllers, final Set<Role> rolesToAdd, final Set<User> usersToAddPermissions) {
-        List<ControllerDTO> collect = controllers.stream()
-                .map(c -> new ControllerDTO(c, rolesToAdd, usersToAddPermissions))
-                .peek(c -> logger.debug("controller: ", c))
-                .collect(Collectors.toList());
+    public static Page<ControllerDTO> convert(Page<Controller> controllers, final Set<Role> rolesToAdd, final Set<User> usersToAddPermissions) {
+        var collect = controllers.map(c -> new ControllerDTO(c, rolesToAdd, usersToAddPermissions));
         return collect;
     }
 

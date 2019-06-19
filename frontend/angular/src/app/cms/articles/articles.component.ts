@@ -14,11 +14,10 @@ import { NGXLogger } from 'ngx-logger';
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
-  @ViewChild('articleComponent')
+  @ViewChild('articleComponent', {static: false})
   articleComponent: ArticleComponent;
   logged = {};
   articles = <ArticleModel[]>[];
-  page = 0;
   link: string;
   article: ArticleModel;
   images: any;
@@ -30,6 +29,11 @@ export class ArticlesComponent implements OnInit {
     private route: ActivatedRoute,
     private logger: NGXLogger,
     private filesService: FilesService) { }
+
+    articlesTotalItems = 0;
+    articlesPage = 0;
+    imagesTotalItems = 0;
+    imagesPage = 0;
 
   ngOnInit() {
     this.environment = environment;
@@ -49,17 +53,20 @@ export class ArticlesComponent implements OnInit {
     this.refreshAll();
   }
 
-  private refreshAll() {
+  public refreshAll() {
     this.logger.info('refreshAll');
     this.loadArticle(this.route.snapshot.params.link);
     this.refreshArticles();
     this.getImages();
   }
 
-  private refreshArticles() {
-    this.articlesService.getUserArticles(this.page).subscribe(p => {
-      this.articles = p.content; 
-      this.logger.info('refreshArticles(link): ', this.page);
+  public refreshArticles(e?) {
+    if (e) { this.articlesPage = e.page - 1; }
+    this.articlesService.getUserArticles(this.articlesPage).subscribe(p => {
+      this.logger.info('refreshArticles: ', p);
+      this.articles = p.content;
+      this.articlesTotalItems = p.totalElements;
+      this.logger.info('refreshArticles: ', this.articlesPage);
     });
   }
 
@@ -73,8 +80,13 @@ export class ArticlesComponent implements OnInit {
   }
 
 
-  getImages() {
-    this.filesService.getFiles(this.page).subscribe(r => this.images = r.content);
+  getImages(e?) {
+    if (e) { this.imagesPage = e.page - 1; }
+    this.filesService.getFiles(this.imagesPage).subscribe(r => {
+      this.logger.info('getImages: ', r);
+      this.images = r.content;
+      this.imagesTotalItems = r.totalElements;
+    });
     console.log(this.images);
   }
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +19,11 @@ import publisaiz.services.UploadedService;
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping({"api/files", "files"})
 @CrossOrigin(origins = {"http://localhost:4200", "http://publisaiz"}, maxAge=3600,
-        allowCredentials = "true", methods = {
-        POST, GET, PATCH, PUT, DELETE, OPTIONS
-})
+        allowCredentials = "true" )
 public class UploadedController {
 
     private final static Logger logger = LoggerFactory.getLogger(UploadedController.class);
@@ -66,14 +64,11 @@ public class UploadedController {
     }
 
     @GetMapping("all")
-    public ResponseEntity<?> findByOwner(Pageable pageable) throws IOException {
+    public ResponseEntity<?> findByOwner(@PageableDefault (size = 9) Pageable pageable) throws IOException {
         logger.info("getAll: [{}]", pageable);
         return uploadedService.findByOwner(pageable);
     }
-    @CrossOrigin(
-            origins = {"http://localhost:4200", "http://publisaiz"},
-            maxAge=3600,
-            allowCredentials = "true")
+
     @PostMapping
     public UploadFileResponse post(@RequestBody MultipartFile file,
                                    @RequestParam(value = "id",

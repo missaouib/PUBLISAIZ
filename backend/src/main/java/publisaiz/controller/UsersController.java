@@ -17,15 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
-
 @RestController
 @RequestMapping("api/users")
 @CrossOrigin(origins = {"http://localhost:4200", "http://publisaiz"}, maxAge=3600,
-        allowCredentials = "true", methods = {
-        POST, GET, PATCH, PUT, DELETE, OPTIONS
-})
+        allowCredentials = "true" )
 public class UsersController {
 
     private final UserService userService;
@@ -42,12 +37,9 @@ public class UsersController {
         logger.info("users [{}]", pageable);
         return userService.getAllUsers(pageable);
     }
-    @CrossOrigin(
-            origins = {"http://localhost:4200", "http://publisaiz"},
-            maxAge=3600,
-            allowCredentials = "true")
+
     @PostMapping
-    public ResponseEntity update(@RequestBody @Valid UserDTO userDTO, BindingResult result) {
+    public ResponseEntity<?> update(@RequestBody @Valid UserDTO userDTO, BindingResult result) {
         if(result.hasErrors())
             return ResponseEntity.badRequest().body(result.getAllErrors());
         logger.info("update userDTO [{}]", userDTO);
@@ -60,7 +52,7 @@ public class UsersController {
     }
 
     @GetMapping("logout")
-    public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);

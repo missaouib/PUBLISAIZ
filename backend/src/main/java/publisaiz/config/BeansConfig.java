@@ -1,12 +1,9 @@
 package publisaiz.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.env.Environment;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -24,8 +21,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -40,11 +35,8 @@ import java.util.Optional;
 @EnableWebMvc
 public class BeansConfig {
 
-    private Logger logger = LoggerFactory.getLogger(BeansConfig.class);
-    private EntityManagerFactory emf;
 
-    public BeansConfig(EntityManagerFactory emf) {
-        this.emf = emf;
+    public BeansConfig( ) {
     }
 
     @Bean

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter , Input } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { RolesService } from '../roles/roles.service';
 

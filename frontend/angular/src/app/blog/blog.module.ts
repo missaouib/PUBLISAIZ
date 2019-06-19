@@ -5,6 +5,9 @@ import { ArticleComponent } from './article/article.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 const routes: Routes = [
   { path: '', component: ArticlesComponent },
   { path: 'blog/:link', component: ArticleComponent },
@@ -17,6 +20,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     PipesModule,
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     FormsModule
   ],
 })

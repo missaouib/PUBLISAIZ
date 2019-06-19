@@ -1,6 +1,5 @@
 package publisaiz.services;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import publisaiz.controller.api.ArticleFormDTO;
 import publisaiz.controller.api.dto.ArticleDTO;
 import publisaiz.datasources.database.entities.Article;
 import publisaiz.datasources.database.entities.User;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -69,15 +67,15 @@ public class ArticleServiceTest {
         Pageable pageable1 = PageRequest.of(0, 2);
         Pageable pageable2 = PageRequest.of(1, 2);
         //when
-        ResponseEntity<List<ArticleDTO>> res1 = articleService.getByForm(form, pageable1);
-        ResponseEntity<List<ArticleDTO>> res2 = articleService.getByForm(form, pageable2);
+        var res1 = articleService.getByForm(form, pageable1);
+        var res2 = articleService.getByForm(form, pageable2);
         //then
-        assert res1.getBody().size() == 2;
-        assert res2.getBody().size() == 2;
-        assert res1.getBody().get(0).getTitle() == "something1";
-        assert res1.getBody().get(1).getTitle() == "something2";
-        assert res2.getBody().get(0).getTitle() == "something3";
-        assert res2.getBody().get(1).getTitle() == "something4";
+        assert res1.getBody().getNumberOfElements() == 2;
+        assert res2.getBody().getNumberOfElements() == 2;
+        assert res1.getBody().getContent().get(0).getTitle() == "something1";
+        assert res1.getBody().getContent().get(1).getTitle() == "something2";
+        assert res2.getBody().getContent().get(0).getTitle() == "something3";
+        assert res2.getBody().getContent().get(1).getTitle() == "something4";
     }
 
     @Test
@@ -90,13 +88,13 @@ public class ArticleServiceTest {
         form2.setTerm("something2");
         Pageable pageable = PageRequest.of(0, 8);
         //when
-        ResponseEntity<List<ArticleDTO>> res2 = articleService.getByForm(form2, pageable);
-        ResponseEntity<List<ArticleDTO>> res1 = articleService.getByForm(form1, pageable);
+        var res2 = articleService.getByForm(form2, pageable);
+        var res1 = articleService.getByForm(form1, pageable);
         //then
-        assert res1.getBody().size() == 1;
-        assert res2.getBody().size() == 1;
-        assert res1.getBody().get(0).getTitle() == "something1";
-        assert res2.getBody().get(0).getTitle() == "something2";
+        assert res1.getBody().getContent().size() == 1;
+        assert res2.getBody().getContent().size() == 1;
+        assert res1.getBody().getContent().get(0).getTitle() == "something1";
+        assert res2.getBody().getContent().get(0).getTitle() == "something2";
     }
 
 }

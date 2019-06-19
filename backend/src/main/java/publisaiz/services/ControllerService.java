@@ -2,6 +2,8 @@ package publisaiz.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import publisaiz.datasources.database.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -87,7 +90,7 @@ public class ControllerService {
         repository.save(controller);
     }
 
-    public ResponseEntity save(ControllerDTO dto) {
+    public ResponseEntity<?> save(ControllerDTO dto) {
         logger.info("save [{}]", dto);
         Controller c = ControllerDTO.toEntity(dto, this);
         return ResponseEntity.ok(new ControllerDTO(c));

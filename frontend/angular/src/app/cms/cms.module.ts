@@ -12,14 +12,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
-import { TruncatePipe, StripTagsPipe } from 'angular-pipes';
-import { AppModule } from '../app.module';
 import { PipesModule } from '../pipes/pipes.module';
-// profile
-// articles
-// sell
-// purchased
-// settings
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const routes = [
   { path: 'article', component: ArticleComponent },
@@ -49,6 +43,7 @@ const routes = [
     HttpClientModule,
     AngularEditorModule,
     RouterModule.forChild(routes),
+    PaginationModule.forRoot(),
     PipesModule
   ]
 })
