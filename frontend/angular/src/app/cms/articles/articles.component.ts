@@ -22,6 +22,8 @@ export class ArticlesComponent implements OnInit {
   article: ArticleModel;
   images: any;
   environment: { production: boolean; apiUrl: string; };
+  articlesPerPage: Number;
+  imagesPerPage: Number;
 
   constructor(private router: Router,
     private articlesService: ArticlesService,
@@ -31,9 +33,9 @@ export class ArticlesComponent implements OnInit {
     private filesService: FilesService) { }
 
     articlesTotalItems = 0;
-    articlesPage = 0;
+    articlesPage = 1;
     imagesTotalItems = 0;
-    imagesPage = 0;
+    imagesPage = 1;
 
   ngOnInit() {
     this.environment = environment;
@@ -43,10 +45,14 @@ export class ArticlesComponent implements OnInit {
     this.refreshAll();
   }
 
+
   updateArticle(image) {
     this.article.image = image;
-    this.articleService.postArticle(this.article).subscribe(r => this.article = r.content);
-    this.refreshAll();
+    this.articleService.postArticle(this.article).subscribe(
+      r => {
+        this.article = r.content;
+        this.refreshAll();
+      });
   }
 
   onEvent(event) {
@@ -56,18 +62,21 @@ export class ArticlesComponent implements OnInit {
   public refreshAll() {
     this.logger.info('refreshAll');
     this.loadArticle(this.route.snapshot.params.link);
-    this.refreshArticles();
     this.getImages();
+    this.refreshArticles();
   }
 
   public refreshArticles(e?) {
-    if (e) { this.articlesPage = e.page - 1; }
-    this.articlesService.getUserArticles(this.articlesPage).subscribe(p => {
-      this.logger.info('refreshArticles: ', p);
-      this.articles = p.content;
-      this.articlesTotalItems = p.totalElements;
-      this.logger.info('refreshArticles: ', this.articlesPage);
-    });
+    if (e) { this.articlesPage = e.page; }
+    if(this.articlesPage){
+      this.articlesService.getUserArticles(this.articlesPage -1).subscribe(p => {
+        this.logger.info('refreshArticles: ', p);
+        this.articles = p.content;
+        this.articlesTotalItems = p.totalElements;
+        this.articlesPerPage = p.pageable.pageSize;
+        this.logger.info('refreshArticles: ', this.articlesPage);
+      });
+    }
   }
 
   loadArticle(link) {
@@ -79,13 +88,13 @@ export class ArticlesComponent implements OnInit {
     }
   }
 
-
   getImages(e?) {
-    if (e) { this.imagesPage = e.page - 1; }
-    this.filesService.getFiles(this.imagesPage).subscribe(r => {
+    if (e) { this.imagesPage = e.page; }
+    this.filesService.getFiles(this.imagesPage -1).subscribe(r => {
       this.logger.info('getImages: ', r);
       this.images = r.content;
       this.imagesTotalItems = r.totalElements;
+      this.imagesPerPage = r.pageable.pageSize;
     });
     console.log(this.images);
   }

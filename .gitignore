@@ -17,7 +17,7 @@ frontend/angular/dist
 
 postgres_data
 
-resources
+/resources
 h2database.trace.db
 application.log**
 

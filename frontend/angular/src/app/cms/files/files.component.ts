@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FilesService } from 'src/app/_services/files.service';
 import { environment } from 'src/environments/environment';
-import { ArticleModel } from 'src/app/_model/article.model';
 
 @Component({
   selector: 'app-files',
@@ -15,13 +14,21 @@ export class FilesComponent implements OnInit {
   envUrl: string;
   @Output()
   setFeaturedEventEmitter = new EventEmitter<any>();
-  
-  constructor() { }
+  @Output()
+  deleteImageEventEmitter = new EventEmitter<any>();
+
+  constructor(private filesService: FilesService) { }
 
   ngOnInit() {
     this.envUrl = environment.apiUrl;
   }
-  
+
+  deleteImage(img: any) {
+    this.filesService.deleteFile(img).subscribe(r =>
+      this.deleteImageEventEmitter.emit(null)
+    );
+    console.log(this.images);
+  }
 
   setAsFeatured(source: any) {
     console.log(JSON.stringify(source));

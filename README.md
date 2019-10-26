@@ -1,21 +1,20 @@
 # PUBLISAIZ
-+ starter for [ angular / spring / postgres / docker ] stack 
++ starter for YOUR PROJECT [ angular / spring / postgres / docker ] 
 + advanced security management implementation and GUI management for admin only
++ http security for each endpoint method configurable by admin
++ granting temporary access to backend http methods per user or group
 + admin rights for first registered person in system.
 + auto registration after login form filled if there is no registered user with login
 [based on groups and individual permissions for existing rest endpoint and method controllers].
-+ auto discovering endpoints and adding to database to be able to manage them
++ auto discovering endpoints and adding to database to let admin be able to manage them
 + posts publication and view
 + main page with pagination
 
-#EXAMPLE
+# DEVTOOLS
++ https scripts for production
++ everything works on localhost with simple "java -jar" and "npm start" HOTSWAP
++ you can run build-dev/deploy.sh script to build, deploy to \[docker-hub\] and run docker images
++ simple starter for react front end
 
-http://publisaiz.fun
-example is maintaned with other repository and this one sometimes will be updated.
-i am not testing this repo but it will contain all features.
-
-WIP:
-- SCRUM/KANBAN board with tasks, users comments
-- posts authors list with some statistical reports
-- mocked views for other not implemented functionalities
-- warnings and errors prompt in UI
+many undocumented candies you will find in the scripts
+good luck with your projects

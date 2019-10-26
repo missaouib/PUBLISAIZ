@@ -19,7 +19,8 @@
   </div>
 </div>
 <hr>
-<pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="totalElements" [(ngModel)]="page"
+<pagination [boundaryLinks]="true" [maxSize]="5" [itemsPerPage]="articlesOnPage" [totalItems]="totalElements"
+  [(ngModel)]="page"
   (pageChanged)="filter($event)">
 </pagination>
 <div class="row">
@@ -40,6 +41,7 @@
     </a>
   </div>
 </div>
-<pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="totalElements" [(ngModel)]="page"
+<pagination [maxSize]="5" [boundaryLinks]="true" [itemsPerPage]="articlesOnPage" [totalItems]="totalElements"
+  [(ngModel)]="page"
   (pageChanged)="filter($event)">
 </pagination>

@@ -1,8 +1,9 @@
 <div class="panel">
   <div class="row">
-    <div *ngFor="let source of images" class="col-4 panel panel-primary">
-      <div class="btn btn-info" (click)="setAsFeatured(source)">SET AS FEATURED</div><br>
-      <img src="{{envUrl + source.url}}" class="rounded float-left image-responsive" style="width: 180x; height: 105px" />
+    <div *ngFor="let image of images" class="col-4 panel panel-primary">
+      <button class="btn btn-xs btn-info" (click)="setAsFeatured(image)">SET AS FEATURED</button>
+      <button class="btn btn-xs btn-danger" (click)="deleteImage(image)"> Delete Image </button><br>
+      <img src="{{envUrl + image.url}}" class="rounded float-left image-responsive" style="width: 180x; height: 105px" />
     </div>
   </div>
 </div>

@@ -23,4 +23,9 @@ export class ArticleService {
     this.logger.debug('ArticleService postArticle', article);
     return this.httpclient.post<any>(environment.apiUrl + 'articles', article);
   }
+
+  postImageToArticle(image) {
+    this.logger.debug('ArticleService postImageToArticle', image);
+    return this.httpclient.post<any>(environment.apiUrl + 'files/article', image);
+  }
 }

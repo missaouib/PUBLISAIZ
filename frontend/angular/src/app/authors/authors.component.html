@@ -1,5 +1,6 @@
 <app-author></app-author>
 
-<p>
-  authors works!
-</p>
+<div *ngFor="let author of authors">
+  {{author.name}} {{author.surname}} {{author.login}}
+  <hr>
+</div>

@@ -5,7 +5,9 @@
         <div class="col-12">
             <h2>ARTICLES</h2>
         </div>
-        <pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="articlesTotalItems" [(ngModel)]="articlesPage"
+        <pagination [maxSize]="5"  [boundaryLinks]="true" [itemsPerPage]="articlesPerPage"
+            [totalItems]="articlesTotalItems"
+            [(ngModel)]="articlesPage"
             (pageChanged)="refreshArticles($event)">
         </pagination>
         <div class="row">
@@ -31,11 +33,14 @@
         <div class="col-12">
             <h2>IMAGES</h2>
         </div>
-        <pagination [boundaryLinks]="true" [itemsPerPage]="9" [totalItems]="imagesTotalItems" [(ngModel)]="imagesPage"
+        <pagination [maxSize]="5" [boundaryLinks]="true" [itemsPerPage]="imagesPerPage" [totalItems]="imagesTotalItems"
+            [(ngModel)]="imagesPage"
             (pageChanged)="getImages($event)">
         </pagination>
         <div class="col-12">
-            <app-files (setFeaturedEventEmitter)="updateArticle($event)" [images]="images"> </app-files>
+            <app-files (setFeaturedEventEmitter)="updateArticle($event)"
+                (deleteImageEventEmitter)="getImages()" [images]="images">
+            </app-files>
         </div>
     </div>
 </div>

@@ -14,6 +14,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 
 const routes = [
   { path: 'article', component: ArticleComponent },
@@ -44,7 +46,8 @@ const routes = [
     AngularEditorModule,
     RouterModule.forChild(routes),
     PaginationModule.forRoot(),
-    PipesModule
+    PipesModule,
+    EditorModule
   ]
 })
 export class CmsModule { }

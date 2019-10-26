@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
 
   refresh() {
     this.service.getAll(this.page).subscribe((r: any) => {
-      this.users = r;
+      this.users = r.content;
       console.log(r);
     });
   }

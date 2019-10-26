@@ -26,7 +26,7 @@ export class MainMenuComponent implements OnInit {
 
   private subscribeForLoggedEvent() {
     this.appService.getLoggedEvent().subscribe((l) => {
-      this.logger.info('subscribeForLoggedEvent notified with : ', l);
+     // this.logger.info('subscribeForLoggedEvent notified with : ', l);
       if (l && l.login && l.roles) {
         this.logged = l;
         this.admin = this.logged.roles.indexOf('admin') > -1;

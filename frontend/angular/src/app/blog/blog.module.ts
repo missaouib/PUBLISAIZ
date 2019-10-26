@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
   { path: '', component: ArticlesComponent },
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ArticlesComponent, ArticleComponent],
+  declarations: [ArticlesComponent, ArticleComponent, NewsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -17,7 +17,7 @@ import java.util.Base64;
 import static javax.crypto.Cipher.*;
 
 @Component
-public class EnDeCryptor {
+class EnDeCryptor {
 
     private static final String ALGORITHM = "AES";
     private static final String MY_ENCRYPTION_KEY = "Th1sjsF4unc%tion";

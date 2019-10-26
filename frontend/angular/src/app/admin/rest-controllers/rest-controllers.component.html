@@ -1,5 +1,5 @@
 <!-- TODO: set pagination configurable - now totalElements *2 because we have 5 elements on page instead of default 10 -->
-<pagination [boundaryLinks]="true" [itemsPerPage]="5" [totalItems]="totalElements" [(ngModel)]="page"
+<pagination [boundaryLinks]="true" [maxSize]="5" [itemsPerPage]="5" [totalItems]="totalElements" [(ngModel)]="page"
   (pageChanged)="refreshControllers($event)">
 </pagination>
 
@@ -8,8 +8,8 @@
     <tr *ngFor="let controller of controllers"
       (keydown.enter)="confirmChanges(controller, addRole, deleteRole, addPermission, deletePermission)">
       <td class="col">
-        <h3>{{controller.controller}}</h3>http method:<b>{{controller.httpMethod}}</b> // url:
-        <b>{{controller.method}}</b>
+        <h4>{{controller.controller}}{{controller.method}}</h4>
+        <p>http:&nbsp;<b>{{controller.httpMethod}}</b></p>
       </td>
       <td class="col">add&nbsp;role: <br>
         <select class="form-control" #addRole>
@@ -39,7 +39,9 @@
         <p *ngFor="let role of controller.roles">role: <b>{{role}}</b></p>
       </td>
       <td class="col">
-        <p *ngFor="let per of controller.permissions">permission: <b>{{per}}</b></p>
+        <p>active permissions: 
+          <b>{{controller.permissions ? controller.permissions.length: 0}}</b>
+        </p>
       </td>
       <td class="col">
         active: <br> <b>{{controller.active}}</b>

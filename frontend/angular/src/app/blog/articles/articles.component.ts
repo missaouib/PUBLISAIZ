@@ -21,6 +21,7 @@ export class ArticlesComponent implements OnInit {
   beforeCache: any;
   afterCache: any;
   totalElements;
+  articlesOnPage: Number;
 
   constructor(private articlesService: ArticlesService,
     public config: BsDatepickerConfig,
@@ -33,6 +34,7 @@ export class ArticlesComponent implements OnInit {
     this.articlesService.getArticles(this.page).subscribe((p: any) => {
       this.articles = p.content;
       this.totalElements = p.totalElements;
+      this.articlesOnPage = p.pageable.pageSize;
     });
     this.observeDates();
   }
@@ -51,6 +53,7 @@ export class ArticlesComponent implements OnInit {
       .subscribe((p: any) => {
         this.logger.debug('getArticlesWithFilter', p);
         this.totalElements = p.totalElements;
+        this.articlesOnPage = p.pageable.pageSize;
         this.articles = p.content;
     });
   }

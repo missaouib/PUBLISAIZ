@@ -1,15 +1,25 @@
-<a class="btn btn-danger" routerLink="/cms/articles">start new article</a>
 <hr>
 <div class="row">
-  <div class="col-1">
-    <label>title: </label>
+  <div class="col-2">
+    <a class="btn btn-danger" routerLink="/cms/articles">start new article</a>
   </div>
-  <div class="col-10">
-    <input class="form-control" [(ngModel)]="article.title" />
+  <div class="col-8">
+    <input class="form-control" [(ngModel)]="article.title" placeholder="title"/>
   </div>
   <div class="col-1">
     <button class="btn btn-success" (click)="edit()"> save </button>
   </div>
+  <div class="col-1">
+    <button class="btn btn-danger" (click)="delete()"> delete </button>
+  </div>
 </div>
-<label>content: </label>
-<angular-editor [(ngModel)]="article.content" [config]="editorConfig"></angular-editor>
+<label>content: </label> <b>[{{images_upload_url}}]</b>
+<editor
+  [(ngModel)]="article.content" 
+  apiKey="cceg5i4ve44fqqh3dwj97lgc57r5uifk7cc17f9r9m8i1ob3"
+  [init]="{
+    plugins: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist
+    numlist outdent indent | link image',
+    images_upload_url: images_upload_url,
+    images_upload_credentials: true
+  }"></editor>

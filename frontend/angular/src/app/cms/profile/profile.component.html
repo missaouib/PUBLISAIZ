@@ -1,3 +1,93 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <hr> NEW PROFILE <hr>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"> Profile Image </div>
+      <div class="panel-body">
+        <img class="img-fluid" *ngIf="profile.profilePhoto" src="{{profile.profilePhoto}}" />
+        <div class="input-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+            (change)="submitProfiePhoto($event, profile)">
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+        <img class="img-fluid" *ngIf="profile.backgroundPhoto" src="{{profile.backgroundPhoto}}" />
+        <div class="input-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon02"
+            (change)="submitBackgroundPhoto($event, profile)">
+          <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="col-lg-7">
+      <div class="panel panel-default">
+        <div class="panel-heading"> Profile Description </div>
+        <div class="panel-body">
+          <textarea class="form-control" [(ngModel)]="profile.description"></textarea>
+            <button class="btn btn-info" (click)="submitProfile(profile)">save</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading"> Recent Posts </div>
+        <div class="panel-body">
+          <div *ngFor="let post of profile.posts">
+            <a routerLink="{{post.link}}">{{post.title}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div><div *ngFor="let profile of profiles" class="row">
+  <div class="col-12">
+    <hr> profile {{profile.id}}
+    <button class="btn btn-danger" (click)="deleteProfile(profile)">delete</button>
+    <hr>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"> Profile Image </div>
+      <div class="panel-body">
+        <img class="img-fluid" *ngIf="profile.profilePhoto" src="{{profile.profilePhoto}}" />
+        <div class="input-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+            (change)="submitProfiePhoto($event, profile)">
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+        <img class="img-fluid" *ngIf="profile.backgroundPhoto" src="{{profile.backgroundPhoto}}" />
+        <div class="input-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon02"
+            (change)="submitBackgroundPhoto($event, profile)">
+          <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="col-lg-7">
+      <div class="panel panel-default">
+        <div class="panel-heading"> Profile Description </div>
+        <div class="panel-body">
+          <textarea class="form-control" [(ngModel)]="profile.description"></textarea>
+            <button class="btn btn-info" (click)="submitProfile(profile)">save</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading"> Recent Posts </div>
+        <div class="panel-body">
+          <div *ngFor="let post of profile.posts">
+            <a routerLink="{{post.link}}">{{post.title}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,14 +46,14 @@ export class LoginService {
   }
 
   private processPositiveResponse(ok: any, credentials?: LoggedModel) {
-    this.logger.debug('LoginService#processPositiveResponse httpclient.subscribe ok:', ok);
+    //this.logger.debug('LoginService#processPositiveResponse httpclient.subscribe ok:', ok);
     this.loggedEvent.emit(ok);
     this.subscribers.forEach(s => s(ok));
-    sessionStorage.setItem('LoginService#processPositiveResponse logged', JSON.stringify(ok));
+    sessionStorage.setItem('logged', JSON.stringify(ok));
     if (credentials && credentials.rememberMe) {
       this.logger.error('feature not implemented yet');
     }
-    this.logger.debug('LoginService#processPositiveResponse this.router.url', this.router.url);
+   // this.logger.debug('LoginService#processPositiveResponse this.router.url', this.router.url);
     if (this.router.url.indexOf('/login') === 0) {
       this.router.navigateByUrl('blog');
     }
